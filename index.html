@@ -40,6 +40,7 @@ summary{cursor:pointer;font-weight:600}details p{margin:10px 0 0;color:var(--tex
 <p class="sub">Legendas, cortes e zooms prontos para o CapCut.</p>
 <div id="auto" hidden><a class="btn" id="btn-auto" href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7.5 11 12 15.5 16.5 11M5 20h14"/></svg><span id="txt-auto"></span></a>
   <p class="outro" id="outro">Usa outro computador? <a href="#todos" id="ver-todos">Ver os dois</a></p></div>
+<p class="outro" id="zip-win" hidden>O antivírus bloqueou o instalador? <a href="https://github.com/fernandoluzd-max/base-captions-releases/releases/latest/download/Base-Captions-Windows.zip">Baixe a versão em .zip</a> (extraia a pasta e abra o "Base Captions.exe").</p>
 <div id="celular" hidden><p class="nota">Abra esta página no seu computador (Mac ou Windows) para baixar.</p></div>
 <div id="todos" class="dois" hidden>
   <a class="btn" href="https://github.com/fernandoluzd-max/base-captions-releases/releases/latest/download/Base-Captions-Mac.dmg"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7.5 11 12 15.5 16.5 11M5 20h14"/></svg>Baixar para Mac</a>
@@ -62,12 +63,12 @@ summary{cursor:pointer;font-weight:600}details p{margin:10px 0 0;color:var(--tex
   var R='https://github.com/fernandoluzd-max/base-captions-releases/releases/latest/download', ua=navigator.userAgent||'', plat=(navigator.userAgentData&&navigator.userAgentData.platform)||navigator.platform||'';
   var celular=/iPhone|iPad|iPod|Android|Mobile/i.test(ua)||(/Mac/.test(plat)&&navigator.maxTouchPoints>1);
   var win=/Win/i.test(plat)||/Windows/i.test(ua), mac=!celular&&(/Mac/i.test(plat)||/Macintosh/i.test(ua));
-  var $=function(i){return document.getElementById(i)};
-  if(celular){$('celular').hidden=false;$('todos').hidden=false;}
+  var $=function(i){return document.getElementById(i)}; function todos(){$('todos').hidden=false;$('zip-win').hidden=false;}
+  if(celular){$('celular').hidden=false;todos();}
   else if(win||mac){
     $('auto').hidden=false; $('btn-auto').href=R+(win?'/Base-Captions-Windows.exe':'/Base-Captions-Mac.dmg');
-    $('txt-auto').textContent=win?'Baixar para Windows':'Baixar para Mac'; $('nota-mac').hidden=!mac;
-    $('ver-todos').addEventListener('click',function(e){e.preventDefault();$('todos').hidden=false;$('outro').hidden=true;});
-  } else { $('todos').hidden=false; }
+    $('txt-auto').textContent=win?'Baixar para Windows':'Baixar para Mac'; $('nota-mac').hidden=!mac; $('zip-win').hidden=!win;
+    $('ver-todos').addEventListener('click',function(e){e.preventDefault();todos();$('outro').hidden=true;});
+  } else { todos(); }
 })();
 </script></body></html>
